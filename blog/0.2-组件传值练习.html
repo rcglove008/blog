@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- 引入 echarts.js -->
+     <script type="text/javascript"src="js/vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="box">
+            <navbar @myevent="handleEvent()"></navbar>
+            <sidebar v-show="isShow"></sidebar>
+
+    </div>
+    
+    <script type="text/javascript">
+
+// 组件
+    Vue.component("sidebar",{
+        template:`
+        <ul style="background:blue ">
+          <li>1111111</li>
+          <li>2222222</li>
+        </ul>
+        `
+    })
+// 组件
+    Vue.component("navbar",{
+        template:`
+        <nav>
+            <button @click="handle()">显示/隐藏</button>
+                <span style="background:yellow"> {{title}} <span>
+        </nav>`,//描述组件DOM结构
+        methods:{
+            handle(){
+                this.$emit("myevent")
+            }
+        },
+        //在组件中data必须是函数是写法，必须有返回值
+        data(){
+                return{
+                    title:"卖座",
+                    datalist:''
+                }
+            },
+    })
+
+    
+
+//vue 实力 root componennt 跟组件
+    new Vue({
+          el:"#box",
+          data:{
+            //  title:"卖座"
+            isShow:true
+          },
+        methods:{
+            handleEvent(){
+                this.isShow=!this.isShow//取反显示
+            }
+        }
+      })
+    
+    </script>
+
+</body>
+</html>

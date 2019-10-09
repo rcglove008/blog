@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- 引入 echarts.js -->
+     <script type="text/javascript"src="js/vue.min.js"></script>
+     <style>
+     .active{
+         background-color: blue
+     }
+     </style>
+</head>
+<body>
+   <!--子组件给父组件传值
+子传父需要一个事件
+-->
+    <div id="box">
+        <p>父组件</p>
+        <child @myevent="handleEvent"></child>
+    </div>
+    <script type="text/javascript">
+
+    Vue.component("child",{
+        template:`
+        <div>
+            child
+            <button @click="handleClick">点击</button>
+          
+        </div>`,//描述组件DOM结构
+       data(){
+           return{
+           Num:800
+           }
+       },
+       methods:{
+        handleClick(){
+            //通知父组件
+            //this.$emit("myevent",1000)
+            this.$emit("myevent",this.Num)
+            //定时器
+            // setInterval(() => {
+            //     this.$emit("myevent",10)
+            // }, 1000);
+        }
+       }    
+    })
+
+    
+  
+    //vue 实力 root componennt 跟组件
+      new Vue({
+          el:"#box",
+          data:{
+          },
+          methods:{
+            handleEvent(data){
+                console.log('传什么东西',data)
+            }
+          }
+      })
+    
+    </script>
+
+</body>
+</html>

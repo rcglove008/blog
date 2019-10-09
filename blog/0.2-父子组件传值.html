@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- 引入 echarts.js -->
+     <script type="text/javascript"src="js/vue.min.js"></script>
+     <style>
+     .active{
+         background-color: blue
+     }
+     </style>
+</head>
+<body>
+   <!--组件注册方法
+    父传子 父组件text值传给子组件中:work属性传值应该加‘ : ’
+    -->
+    <div id="box">
+            <navbar titles="首页" :work="text" :show="false"></navbar>
+            <navbar titles="列表页" work="text" :show="true"></navbar>
+            <navbar titles="详情页" tel="133564787" :work="text" :show="true"></navbar>
+           
+    </div>
+    <script type="text/javascript">
+
+  
+
+    Vue.component("navbar",{
+        template:`
+        <nav>
+            <button @click="handleBack()">返回</button>
+                <span style="background:yellow">  {{title}}--{{titles}}--{{tel}}  <span>
+            <button v-show="show">主页</button>   
+            <p >{{work}}</p>       
+        </nav>`,//描述组件DOM结构
+        
+        //props:["titles","tel","work","show"],//父子组件之间传值，数组的形式传值
+                                             //show 用v-show接收是否显示
+        props:{
+                title:String,
+                titles:String,
+                tel:String,
+                work:String,
+                show:Boolean
+        },
+        methods:{
+            handleBack(){
+                console.log('组件中的方法')
+            }
+        },
+
+        //在组件中data必须是函数是写法，必须有返回值
+        data(){
+                return{
+                    title:"组件中数据是函数",
+                    datalist:''
+                }
+            }
+        
+    })
+
+    
+    //vue 实力 root componennt 跟组件
+      new Vue({
+          el:"#box",
+          data:{
+            //  title:"卖座"
+            text:"生命的意义",
+          }
+      })
+    
+    </script>
+
+</body>
+</html>

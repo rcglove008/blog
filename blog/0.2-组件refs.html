@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- 引入 echarts.js -->
+     <script type="text/javascript"src="js/vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="box">
+         <input type="text" ref="mytext">
+         <button @click="handleClick()">click</button>
+         <child ref="mychild"></child>
+    </div>
+    
+    <script type="text/javascript">
+    Vue.component("child",{
+        template:`
+        <div>child组件</div>
+    `,
+        data(){
+            return{
+                title:"child titel"
+            }
+        },
+        methods:{
+            getValue(data){
+                console.log("从父组件传来的值",data)
+            }
+        }
+    })
+//vue 实力 root component 跟组件
+    new Vue({
+        el:"#box",
+        data:{
+
+          },
+        methods:{
+            handleClick(){
+               // console.log(this.$refs.mytext.value)
+               console.log(this.$refs.mychild)
+               this.$refs.mychild.getValue(this.$refs.mytext.value)
+            }
+        }
+      })
+    // 1.ref放在标签上，拿到的的原生节点
+    // 2.ref放在组件上，拿到的是组件对象
+    </script>
+
+</body>
+</html>

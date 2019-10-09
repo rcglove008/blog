@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- 引入 echarts.js -->
+     <script type="text/javascript"src="js/vue.min.js"></script>
+     <style>
+     .active{
+         background-color: blue
+     }
+     </style>
+</head>
+<body>
+   
+    <div id="box">
+       <ui>
+            <li v-for="(itme,index) in datalist" :class=" current===index ? 'active':''" @click="handleClick(index)">
+                    {{itme}}---{{index}}
+             </li> 
+        
+         {{name}}
+        </ui> 
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el:"#box",
+        data:{
+            name:'测试',
+            datalist:["11111","2222","3333"],
+            current:2
+        },
+        methods: {
+            handleClick(index){
+                console.log(index)
+                this.current=index;
+            }
+        },
+    })
+    
+   </script>
+<!-- Vue 鼠标点选数组 -->
+</body>
+</html>
